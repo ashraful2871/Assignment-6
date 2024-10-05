@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peddy</title>
+
+    <!-- link CSS -->
+    <link rel="stylesheet" href="styles/style.css">
+
+    <!-- google font CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- DaisyUI CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.12/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="lato-font">
+    <header class="container mx-auto mb-24">
+        <nav class="my-7 ">
+            <div class="navbar bg-base-100">
+                <div class="navbar-start">
+                    <div class="dropdown">
+                        <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h8m-8 6h16" />
+                            </svg>
+                        </div>
+                        <ul tabindex="0"
+                            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                            <li><a class="font-normal text-base">Home</a></li>
+                            <li><a class="font-normal text-base">Shop</a> </li>
+                            <li><a class="font-normal text-base">Contact</a></li>
+                        </ul>
+                    </div>
+                    <a class="btn btn-ghost text-3xl font-black"><img src="images/logo.webp" alt=""> Peddy</a>
+                </div>
+                <div class="navbar-center hidden lg:flex">
+                    <ul class="menu menu-horizontal px-1">
+                        <li><a class="font-normal text-base">Home</a></li>
+                        <li><a class="font-normal text-base">Shop</a></li>
+                        <li><a class="font-normal text-base">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="navbar-end">
+                    <div class="dropdown dropdown-end">
+                        <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                            <div class="w-10 rounded-full">
+                                <img alt="Tailwind CSS Navbar component"
+                                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                            </div>
+                        </div>
+                        <ul tabindex="0"
+                            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                            <li>
+                                <a class="justify-between">
+                                    Profile
+                                    <span class="badge">New</span>
+                                </a>
+                            </li>
+                            <li><a>Settings</a></li>
+                            <li><a>Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero container -->
+
+        <div class="text-center ">
+            <!-- <div class="   min-w-screen"> -->
+            <div class=" space-y-5 ">
+                <h3 class="font-bold text-2xl text-[#13131396]">Bringing Families Together ❤️‍🔥</h3>
+                <h1 class="text-7xl font-bold">Your Path to Adoption <br>Starts Here</h1>
+                <p class="py-6">
+                    It is a long established fact that a reader will be distracted by the readable content of a page
+                    when looking <br>at its layout. The point of using Lorem Ipsum is that it has a.
+                </p>
+                <button class="btn bg-[#0E7A81] text-white hover:bg-[#0E7A81]">View More</button>
+            </div>
+            <div class="flex justify-center w-full  mt-12">
+                <img class="object-cover" src="images/pet.webp" alt="">
+            </div>
+        </div>
+    </header>
+    <main class="">
+        <section class=" mb-32 container mx-auto">
+            <div>
+                <div class="text-center mb-12">
+                    <h1 class="text-4xl font-bold">Adopt Your Best Friend</h1>
+                    <p class="py-6">
+                        It is a long established fact that a reader will be distracted by the readable content of a
+                        <br>page
+                        when looking at its
+                        layout. The point of using Lorem Ipsum is that it has a.
+                    </p>
+                </div>
+
+                <!-- Dynamic BTN  -->
+                <div class="mb-8 flex justify-center gap-28">
+                    <button class="btn font-bold text-xl px-14 rounded-full bg-[#0E7A81] text-white 
+                                    hover:bg-[#0E7A81]">dogs
+                    </button>
+                    <button class="btn font-bold text-xl px-14 rounded-full 
+                                    hover:bg-[#0E7A81] hover:text-white">Cat
+                    </button>
+                    <button class="btn font-bold text-xl px-14 rounded-full
+                                    hover:bg-[#0E7A81] hover:text-white">Rabbit
+                    </button>
+                    <button class="btn font-bold text-xl px-14 rounded-full 
+                                    hover:bg-[#0E7A81] hover:text-white">Bird
+                    </button>
+                </div>
+
+                <div class="flex justify-between mb-8 items-center text-center">
+                    <div>
+                        <h2 class="font-black text-2xl">Best Deal For you</h2>
+                    </div>
+                    <div>
+                        <button class="btn bg-[#0E7A81] text-white font-bold text-lg px-6 pb-4 pt-2">
+                            Short by Price
+                        </button>
+
+                    </div>
+                </div>
+
+                <!-- Dynamic card container -->
+                <div class="  flex justify-between gap-6 border-2 border-red-500">
+                    <div class="grid grid-cols-3 gap-6">
+                        <!-- card 1 -->
+                        <div class="card bg-base-100 p-5 border">
+                            <figure>
+                                <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                                    alt="pets" />
+                            </figure>
+                            <div class="card-body mb-2">
+                                <h2 class="card-title font-bold text-xl">
+                                    Title
+                                </h2>
+                                <div class="flex gap-2 items-center">
+                                    <div>
+                                        <img src="images/Frame (4).png" alt="">
+                                    </div>
+                                    <div>
+                                        <p>Breed:</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-2 items-center">
+                                    <div>
+                                        <img src="images/Frame (1).png" alt="">
+                                    </div>
+                                    <div>
+                                        <p>Birth:</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-2 items-center">
+                                    <div>
+                                        <img src="images/Frame (2).png" alt="">
+                                    </div>
+                                    <div>
+                                        <p>Gender:</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-2 items-center">
+                                    <div>
+                                        <img src="images/Frame (3).png" alt="">
+                                    </div>
+                                    <div>
+                                        <p>Price:</p>
+                                    </div>
+                                </div>
+                                <hr class="mt-4 border">
+                                <div class="card-actions justify-evenly mt-4">
+                                    <div class="badge badge-outline py-3 px-4 text-xl">
+                                        <button>
+
+                                            <img src="images/Frame 1171276315.png" alt="">
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <button
+                                            class="badge badge-outline py-3 px-4 text-[#0E7A81] text-xl hover:bg-[#0E7A81] hover:text-white">
+                                            Adopt
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <button
+                                            class="badge badge-outline py-3 px-4 text-[#0E7A81] text-xl hover:bg-[#0E7A81] hover:text-white">
+                                            Details
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div>
+                        <div class="card bg-base-100 w-80 p-5 border grid grid-cols-2">
+                            <img src="images/Rectangle 1 (2).png" alt="">
+                            <img src="images/Rectangle 1 (2).png" alt="">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+    <footer>
+
+    </footer>
+</body>
+
+</html>
