@@ -125,22 +125,34 @@
                     </div>
                 </div>
                 <!-- Dynamic card container -->
-                <div class="  flex flex-col md:flex-row md:justify-between gap-6">
-                    <div id="pets-container" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="  flex flex-col md:flex-col lg:flex-row justify-between gap-5 lg:gap-6">
+                    <div id="pets-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
 
 
                     </div>
-                    <div>
-                        <div class="card bg-base-100 w-80 p-5 border grid grid-cols-2">
-                            <img src="images/Rectangle 1 (2).png" alt="">
-                            <img src="images/Rectangle 1 (2).png" alt="">
+                    <div id="like-pets-container" class="w-80 mt-32 mb-32 border border-red-400 grid grid-cols-2 gap-5">
 
-                        </div>
+
+
+
                     </div>
                 </div>
 
             </div>
+
+            </div>
+            <!-- modal container -->
+            <div class="modal-container">
+                <!-- You can open the modal using ID.showModal() method -->
+
+                <dialog id="customModal" class="modal">
+                    <div class="modal-box w-11/12 max-w-5xl">
+                        <div id="modal-content">
+
+
+                        </div>
+                </dialog>
             </div>
 
         </section>
@@ -208,3 +220,96 @@
 </body>
 
 </html>
+
+<!-- <div>
+    modalContainerEl.innerHTML = `
+    
+    <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+            <h3 class="text-lg font-bold">Alessia Max</h3>
+    
+            <div>
+                <div>
+                    <figure class="h-52">
+                        <img class="h-full w-full object-cover" src=${ data.petData?.image || "N/A" } alt="pets" />
+                    </figure>
+                    <div class="card-body mb-2">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h2 class="card-title font-bold text-xl">
+                                    ${
+                                    data.petData?.pet_name ||
+                                    "N/A"
+                                    }
+                                </h2>
+                                <div class="flex gap-2 items-center">
+                                    <div>
+                                        <img src="images/Frame (4).png" alt="">
+                                    </div>
+                                    <div>
+                                        <p>Breed: ${
+                                            data.petData?.breed ||
+                                            "N/A"
+                                            }</p>
+                                    </div>
+                                </div>
+    
+                                <div class="flex gap-2 items-center">
+                                    <div>
+                                        <img src="images/Frame (2).png" alt="">
+                                    </div>
+                                    <div>
+                                        <p>Gender: ${
+                                            data.petData?.gender ||
+                                            "N/A"
+                                            }</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-2 items-center">
+                                    <div>
+                                        <img src="images/Frame (2).png" alt="">
+                                    </div>
+                                    <div>
+                                        <p>Vaccinated status: Partially</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex gap-2 items-center">
+                                    <div>
+                                        <img src="images/Frame (1).png" alt="">
+                                    </div>
+                                    <div>
+                                        <p>Birth: ${
+                                            data.petData
+                                            ?.date_of_birth || "N/A"
+                                            }</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-2 items-center">
+                                    <div>
+                                        <img src="images/Frame (3).png" alt="">
+                                    </div>
+                                    <div>
+                                        <p>Price: ${
+                                            data.petData?.price ||
+                                            "Out Of Stock"
+                                            } $</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+                <div class="modal-action">
+                    <form method="dialog">
+                        <!-- if there is a button in form, it will close the modal -->
+<!-- <button class="btn">Close</button>
+</form>
+</div>
+</div>
+</dialog>
+
+`;
+</div> -->

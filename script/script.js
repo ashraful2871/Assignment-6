@@ -25,7 +25,7 @@ const displayPets = (pets) => {
     const div = document.createElement("div");
 
     div.innerHTML = `
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         
                         <div class="card bg-base-100 p-5 w-96 border">
                             <figure class="h-52">
@@ -77,7 +77,9 @@ const displayPets = (pets) => {
                                 <hr class="mt-4 border">
                                 <div class="card-actions justify-evenly mt-4">
                                     <div class="badge badge-outline py-3 px-4 text-xl">
-                                        <button>
+                                        <button onclick="likePost('${
+                                          pet.image
+                                        }')">
 
                                             <img src="images/Frame 1171276315.png" alt="">
                                         </button>
@@ -89,8 +91,11 @@ const displayPets = (pets) => {
                                         </button>
                                     </div>
                                     <div>
-                                        <button
-                                            class="badge badge-outline py-3 px-4 text-[#0E7A81] text-xl hover:bg-[#0E7A81] hover:text-white">
+                                    
+                                        <button onclick="showModalD('${
+                                          pet.petId
+                                        }')"
+                                            class=" badge badge-outline py-3 px-4 text-[#0E7A81] text-xl hover:bg-[#0E7A81] hover:text-white">
                                             Details
                                         </button>
                                     </div>
@@ -106,6 +111,100 @@ const displayPets = (pets) => {
   });
 };
 
+// show modal
+const showModalD = async (petId) => {
+  console.log(petId);
+  const url = `https://openapi.programming-hero.com/api/peddy/pet/${petId}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  console.log(data.petData);
+
+  const modalContent = document.getElementById("modal-content");
+  document.getElementById("customModal").showModal();
+  modalContent.innerHTML = `
+                            <figure class="min-h-56">
+                                <img class="h-full w-full object-cover" src=${
+                                  data.petData?.image || "N/A"
+                                }
+                                    alt="pets" />
+                            </figure>
+                            <div class="card-body mb-2">
+                                <div class="flex gap-16 items-center">
+                                    <div>
+                                        <h2 class="card-title font-bold text-xl mb-4">
+                                            ${data.petData?.pet_name || "N/A"}
+                                        </h2>
+                                        <div class="flex gap-2 items-center">
+                                            <div>
+                                                <img src="images/Frame (4).png" alt="">
+                                            </div>
+                                            <div>
+                                                <p>Breed: ${
+                                                  data.petData?.breed || "N/A"
+                                                }</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex gap-2 items-center">
+                                            <div>
+                                                <img src="images/Frame (2).png" alt="">
+                                            </div>
+                                            <div>
+                                                <p>Gender: ${
+                                                  data.petData?.gender || "N/A"
+                                                }</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-2 items-center">
+                                            <div>
+                                                <img src="images/Frame (2).png" alt="">
+                                            </div>
+                                            <div>
+                                                <p>Vaccinated status: Partially</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex gap-2 items-center mt-4">
+                                            <div>
+                                                <img src="images/Frame (1).png" alt="">
+                                            </div>
+                                            <div>
+                                                <p>Birth: ${
+                                                  data.petData?.date_of_birth ||
+                                                  "N/A"
+                                                }</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-2 items-center">
+                                            <div>
+                                                <img src="images/Frame (3).png" alt="">
+                                            </div>
+                                            <div>
+                                                <p>Price: ${
+                                                  data.petData?.price ||
+                                                  "Out Of Stock"
+                                                } $</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h2 class="font-semibold text-base mt-8 mb-3">Details Information</h2>
+                                    <p>${data.petData?.pet_details || "N/A"}</p>
+                                </div>
+
+                            </div>
+                            
+                            <div class="modal-action">
+                                <form method="dialog">
+                                  
+                                    <button class="btn w-full text-[#0E7A81] text-xl bg-[#0e79811c] hover:bg-[#0E7A81] hover:text-white">Close</button>
+                                </form>
+                            </div>
+  `;
+};
+
 // load category pets
 const loadCategoriesPets = async (category) => {
   const url = `https://openapi.programming-hero.com/api/peddy/category/${category}`;
@@ -113,17 +212,18 @@ const loadCategoriesPets = async (category) => {
   const data = await res.json();
   displayPets(data.data);
   console.log(data);
+
   //   alert(id);
   //   console.log(id);
 };
 
 // display pets by categories
 const displayCategories = (categories) => {
-  console.log(categories);
+  //   console.log(categories);
   const btnCategoriesContainer = document.getElementById("btn-container");
 
   categories.forEach((item) => {
-    console.log(item);
+    // console.log(item);
     const btnContainer = document.createElement("div");
     btnContainer.innerHTML = `
         <button  onClick="loadCategoriesPets('${item.category}')" class="btn font-bold text-xl px-14 rounded-full
@@ -136,3 +236,26 @@ const displayCategories = (categories) => {
 };
 
 loadCategories();
+
+// like post section
+
+const likePost = (image) => {
+  //   console.log(image);
+  const likePostContainerEl = document.getElementById("like-pets-container");
+  const div = document.createElement("div");
+  div.innerHTML = `
+  
+                        <div class="w-52 grid grid-cols-2">
+                            <img class="w-full" src='${image}' alt="">
+                        </div>
+
+                       
+        
+                            
+
+
+                      
+  `;
+  likePostContainerEl.append(div);
+};
+likePost();

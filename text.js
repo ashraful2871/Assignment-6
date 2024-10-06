@@ -142,3 +142,33 @@ const obj = {
     pet_name: "Chloe",
   },
 ];
+
+[
+  {
+    petId: 3,
+    category: "Rabbit",
+    date_of_birth: "2022-04-20",
+    price: 1500,
+    image: "https://i.ibb.co.com/s3PXSwD/pet-3.jpg",
+    gender: "Male",
+    pet_details:
+      "This male African Grey rabbit is a small, friendly companion born on April 20, 2022. He prefers a calm environment and enjoys gentle handling. Partially vaccinated, he's a great choice for rabbit lovers who want a peaceful, easygoing pet. Priced at $1500, he's perfect for a quiet home environment.",
+    vaccinated_status: "Partially",
+    pet_name: "Coco",
+  },
+];
+[
+  {
+    petId: 5,
+    breed: "Beagle",
+    category: "Dog",
+    date_of_birth: null,
+    price: 900,
+    image: "https://i.ibb.co.com/BwnvDMY/pet-5.jpg",
+    gender: "Female",
+    pet_details:
+      "This curious female Beagle was born on March 22, 2023, and loves to explore and play. She is great with kids and enjoys outdoor adventures. Fully vaccinated and priced at $900, she's perfect for an active family looking for a loyal, energetic companion.",
+    vaccinated_status: "Fully",
+    pet_name: "Bella",
+  },
+];
