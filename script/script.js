@@ -13,12 +13,13 @@ const loadCategories = async () => {
   const res = await fetch(url);
   const data = await res.json();
   displayCategories(data.categories);
+  //   console.log(data.categories);
 };
-loadCategories();
 
 // display all pets
 const displayPets = (pets) => {
   const petsContainerEl = document.getElementById("pets-container");
+  petsContainerEl.innerHTML = "";
   pets.forEach((pet) => {
     // console.log(pet);
     const div = document.createElement("div");
@@ -105,30 +106,33 @@ const displayPets = (pets) => {
   });
 };
 
+// load category pets
+const loadCategoriesPets = async (category) => {
+  const url = `https://openapi.programming-hero.com/api/peddy/category/${category}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  displayPets(data.data);
+  console.log(data);
+  //   alert(id);
+  //   console.log(id);
+};
+
 // display pets by categories
 const displayCategories = (categories) => {
+  console.log(categories);
   const btnCategoriesContainer = document.getElementById("btn-container");
 
-  categories.forEach((items) => {
-    console.log(items);
+  categories.forEach((item) => {
+    console.log(item);
     const btnContainer = document.createElement("div");
     btnContainer.innerHTML = `
-        <button  onClick="loadCategoriesPets(${items.category})" class="btn font-bold text-xl px-14 rounded-full bg-[#0E7A81] text-white
-                                    lg:hover:bg-[#0E7A81] hover:text-white">${items.category}
-                    </button>
+        <button  onClick="loadCategoriesPets('${item.category}')" class="btn font-bold text-xl px-14 rounded-full
+            bg-[#0E7A81] text-white lg:hover:bg-[#0E7A81] hover:text-white">${item.category}
+        </button>
 
     `;
     btnCategoriesContainer.append(btnContainer);
   });
 };
 
-// // load category pets
-// const loadCategoriesPets = async (id) => {
-//   const url = `https://openapi.programming-hero.com/api/peddy/category/${id}`;
-//   const res = await fetch(url);
-//   const data = await res.json();
-
-//   //   displayPets(data.petData.category);
-//   console.log(data);
-// };
-// loadCategoriesPets();
+loadCategories();
