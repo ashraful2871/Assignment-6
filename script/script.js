@@ -3,8 +3,19 @@ const loadAllPets = async () => {
   const res = await fetch(url);
   const data = await res.json();
   displayPets(data.pets);
+  //   console.log("Ash");
+  document.getElementById("spinner").classList.add("hidden");
 };
-loadAllPets();
+// loadAllPets();
+
+const loadingSpinner = () => {
+  document.getElementById("spinner").classList.remove("hidden");
+
+  setTimeout(function () {
+    loadAllPets();
+  }, 2000);
+};
+loadingSpinner();
 
 // load categories pets
 const loadCategories = async () => {
@@ -140,11 +151,11 @@ const displayPets = (pets) => {
 
 // show modal
 const showModalD = async (petId) => {
-  console.log(petId);
+  //   console.log(petId);
   const url = `https://openapi.programming-hero.com/api/peddy/pet/${petId}`;
   const res = await fetch(url);
   const data = await res.json();
-  console.log(data.petData);
+  //   console.log(data.petData);
 
   const modalContent = document.getElementById("modal-content");
   document.getElementById("customModal").showModal();
@@ -249,7 +260,7 @@ const removeClassBtn = () => {
   const buttons = document.getElementsByClassName("category-btn");
 
   for (let btn of buttons) {
-    console.log(btn);
+    // console.log(btn);
     btn.classList.remove("active");
   }
 };
@@ -259,7 +270,7 @@ const displayCategories = (categories) => {
   const btnCategoriesContainer = document.getElementById("btn-container");
 
   categories.forEach((item) => {
-    console.log(item);
+    // console.log(item);
     const btnContainer = document.createElement("div");
     btnContainer.innerHTML = `
         <button id="btn-${item.id}"  onClick="loadCategoriesPets('${item.category}','${item.id}')" class="btn category-btn font-bold md:text-xl px-14 rounded-full

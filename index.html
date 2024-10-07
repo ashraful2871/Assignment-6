@@ -97,7 +97,7 @@
     </header>
 
     <main class="p-4 md:p-0">
-        <section id="adopt" class="container mx-auto mb-32">
+        <section id="adopt" class="container mx-auto mb-32 relative">
             <div>
                 <div class="text-center mb-12">
                     <h1 class="text-4xl font-bold">Adopt Your Best Friend</h1>
@@ -129,17 +129,17 @@
                 </div>
                 <!-- Dynamic card container -->
                 <div class="flex flex-col md:flex-col lg:flex-row justify-between gap-5 lg:gap-6">
-                    <div id="pets-container" class="  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 ">
+                    <div id="pets-container" class=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 ">
 
 
 
                     </div>
                     <div id="like-pets-container" class="w-80 border border-red-400 grid grid-cols-2 gap-5 p-5">
 
+                        <!-- <img src="images/Rectangle 1 (2).png" alt="">
                         <img src="images/Rectangle 1 (2).png" alt="">
                         <img src="images/Rectangle 1 (2).png" alt="">
-                        <img src="images/Rectangle 1 (2).png" alt="">
-                        <img src="images/Rectangle 1 (2).png" alt="">
+                        <img src="images/Rectangle 1 (2).png" alt=""> -->
 
 
                     </div>
@@ -160,6 +160,9 @@
                         </div>
                 </dialog>
             </div>
+
+            <!-- load spinner -->
+            <div id="spinner" class="hidden absolute right-[50%] loading loading-bars loading-lg"></div>
 
         </section>
     </main>
