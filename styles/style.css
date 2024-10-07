@@ -3,3 +3,9 @@
   font-weight: 400;
   font-style: normal;
 }
+
+.active {
+  background-color: #0e7a81 !important;
+  color: white !important;
+  cursor: pointer !important;
+}

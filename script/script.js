@@ -20,14 +20,41 @@ const loadCategories = async () => {
 const displayPets = (pets) => {
   const petsContainerEl = document.getElementById("pets-container");
   petsContainerEl.innerHTML = "";
+  if (pets.length == 0) {
+    petsContainerEl.classList.remove("grid");
+
+    petsContainerEl.innerHTML = `
+<div class="card bg-base-100 shadow-xl">
+    <figure>
+        <img src="images/error.webp" alt="Shoes" />
+    </figure>
+    <div class="card-body">
+        <h2 class="font-bold text-4xl text-center mb-4">
+            No Information Available
+
+        </h2>
+        <p class="text-center font-normal text-base ">It is a long established fact that a reader will be distracted by
+            the readable content of
+            a page when looking
+            at<br>
+            its layout. The point of using Lorem Ipsum is that it has a.</p>
+
+    </div>
+</div>
+
+`;
+  } else {
+    petsContainerEl.classList.remove("w-[375px]");
+
+    petsContainerEl.classList.add("grid");
+  }
   pets.forEach((pet) => {
-    // console.log(pet);
     const div = document.createElement("div");
 
     div.innerHTML = `
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
                         
-                        <div class="card bg-base-100 p-5 w-96 border">
+                        <div class="card bg-base-100 p-5 w-[365px] border">
                             <figure class="h-52">
                                 <img class="h-full w-full object-cover" src=${
                                   pet.image
@@ -104,7 +131,7 @@ const displayPets = (pets) => {
                         </div>
 
 
-                    </div>
+                    
     
     `;
     petsContainerEl.appendChild(div);
@@ -129,7 +156,7 @@ const showModalD = async (petId) => {
                                     alt="pets" />
                             </figure>
                             <div class="card-body mb-2">
-                                <div class="flex gap-16 items-center">
+                                <div class="flex flex-col md:flex-row md:gap-16 md:items-center">
                                     <div>
                                         <h2 class="card-title font-bold text-xl mb-4">
                                             ${data.petData?.pet_name || "N/A"}
@@ -206,28 +233,37 @@ const showModalD = async (petId) => {
 };
 
 // load category pets
-const loadCategoriesPets = async (category) => {
+const loadCategoriesPets = async (category, id) => {
+  //   console.log(id);
   const url = `https://openapi.programming-hero.com/api/peddy/category/${category}`;
   const res = await fetch(url);
   const data = await res.json();
+  //   console.log(data);
+  removeClassBtn();
+  const activeBtn = document.getElementById(`btn-${id}`);
+  activeBtn.classList.add("active");
   displayPets(data.data);
-  console.log(data);
+};
 
-  //   alert(id);
-  //   console.log(id);
+const removeClassBtn = () => {
+  const buttons = document.getElementsByClassName("category-btn");
+
+  for (let btn of buttons) {
+    console.log(btn);
+    btn.classList.remove("active");
+  }
 };
 
 // display pets by categories
 const displayCategories = (categories) => {
-  //   console.log(categories);
   const btnCategoriesContainer = document.getElementById("btn-container");
 
   categories.forEach((item) => {
-    // console.log(item);
+    console.log(item);
     const btnContainer = document.createElement("div");
     btnContainer.innerHTML = `
-        <button  onClick="loadCategoriesPets('${item.category}')" class="btn font-bold text-xl px-14 rounded-full
-            bg-[#0E7A81] text-white lg:hover:bg-[#0E7A81] hover:text-white">${item.category}
+        <button id="btn-${item.id}"  onClick="loadCategoriesPets('${item.category}','${item.id}')" class="btn category-btn font-bold md:text-xl px-14 rounded-full
+           bg-[#0e798131] text-[#0E7A81]  lg:hover:bg-[#0E7A81] hover:text-white">${item.category}
         </button>
 
     `;
@@ -245,7 +281,7 @@ const likePost = (image) => {
   const div = document.createElement("div");
   div.innerHTML = `
   
-                        <div class="w-52 grid grid-cols-2">
+                        <div>
                             <img class="w-full" src='${image}' alt="">
                         </div>
 
