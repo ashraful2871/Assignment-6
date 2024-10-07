@@ -2,12 +2,43 @@ const loadAllPets = async () => {
   const url = "https://openapi.programming-hero.com/api/peddy/pets";
   const res = await fetch(url);
   const data = await res.json();
-  displayPets(data.pets);
+  const pets = data.pets;
+  //   displayPets(data.pets);
+  displayPets(pets);
   //   console.log("Ash");
   document.getElementById("spinner").classList.add("hidden");
 };
+const loadSort = async () => {
+  const url = "https://openapi.programming-hero.com/api/peddy/pets";
+  const res = await fetch(url);
+  const data = await res.json();
+  const pets = data.pets;
+  //   displayPets(data.pets);
+  //   console.log("Ash");
+  document.getElementById("spinner").classList.add("hidden");
+  shortDescendingPrice(pets);
+};
 // loadAllPets();
 
+// sort pets by descending order based on price
+
+const shortDescendingPrice = (pets) => {
+  console.log(pets);
+  //   pets.forEach((element) => {
+  //     console.log(element);
+  //   });
+
+  const sortPetsByPrice = pets.sort((a, b) => b.price - a.price);
+  displayPets(sortPetsByPrice);
+};
+
+// sort button
+// document
+//   .getElementById("sort-btn")
+//   .addEventListener("click", shortDescendingPrice);
+// shortDescendingPrice();
+
+//loading spinner
 const loadingSpinner = () => {
   document.getElementById("spinner").classList.remove("hidden");
 
@@ -272,9 +303,13 @@ const displayCategories = (categories) => {
   categories.forEach((item) => {
     // console.log(item);
     const btnContainer = document.createElement("div");
+    // ${item.category_icon}
     btnContainer.innerHTML = `
         <button id="btn-${item.id}"  onClick="loadCategoriesPets('${item.category}','${item.id}')" class="btn category-btn font-bold md:text-xl px-14 rounded-full
-           bg-[#0e798131] text-[#0E7A81]  lg:hover:bg-[#0E7A81] hover:text-white">${item.category}
+           bg-[#0e798131] text-[#0E7A81]  lg:hover:bg-[#0E7A81] hover:text-white">
+                <img class="w-7" src="${item.category_icon}" alt="">
+           
+           <span>${item.category}</span>
         </button>
 
     `;
