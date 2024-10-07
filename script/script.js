@@ -94,9 +94,8 @@ const displayPets = (pets) => {
     const div = document.createElement("div");
 
     div.innerHTML = `
-        
-                        
-                        <div class="card bg-base-100 p-5 w-[365px] border">
+    
+                         <div class="card bg-base-100 p-5 w-[365px] border">
                             <figure class="h-52">
                                 <img class="h-full w-full object-cover" src=${
                                   pet.image
@@ -154,17 +153,21 @@ const displayPets = (pets) => {
                                         </button>
                                     </div>
                                     <div>
-                                        <button
-                                            class="badge badge-outline py-3 px-4 text-[#0E7A81] text-xl hover:bg-[#0E7A81] hover:text-white">
+                                        <button onclick="showCountDown('${
+                                          pet.petId
+                                        }')"
+                                        id="adopt-btn-${pet.petId}"
+                                            class="badge badge-outline py-3 px-4 text-[#0E7A81] 
+                                            text-xl hover:bg-[#0E7A81] hover:text-white">
                                             Adopt
                                         </button>
                                     </div>
                                     <div>
                                     
-                                        <button onclick="showModalD('${
-                                          pet.petId
-                                        }')"
-                                            class=" badge badge-outline py-3 px-4 text-[#0E7A81] text-xl hover:bg-[#0E7A81] hover:text-white">
+                                        <button 
+                                        onclick="showModalD('${pet.petId}')"
+                                            class=" badge badge-outline py-3 px-4 text-[#0E7A81] 
+                                            text-xl hover:bg-[#0E7A81] hover:text-white">
                                             Details
                                         </button>
                                     </div>
@@ -274,6 +277,25 @@ const showModalD = async (petId) => {
   `;
 };
 
+// show count down modal
+const showCountDown = (id) => {
+  // document.getElementById(`adopt-btn-${id}`);
+  my_modal_1.showModal();
+  let countValue = 3;
+  const countNumberEl = document.getElementById("count-number");
+
+  const countDown = setInterval(() => {
+    countValue--;
+    countNumberEl.innerText = countValue;
+    if (countValue <= 0) {
+      clearInterval(countDown);
+      my_modal_1.close();
+      document.getElementById(`adopt-btn-${id}`).innerText = "Adopted";
+      document.getElementById(`adopt-btn-${id}`).classList.add("active");
+    }
+  }, 1000);
+};
+
 // load category pets
 const loadCategoriesPets = async (category, id) => {
   //   console.log(id);
@@ -307,7 +329,7 @@ const displayCategories = (categories) => {
     btnContainer.innerHTML = `
         <button id="btn-${item.id}"  onClick="loadCategoriesPets('${item.category}','${item.id}')" class="btn category-btn font-bold md:text-xl px-14 rounded-full
            bg-[#0e798131] text-[#0E7A81]  lg:hover:bg-[#0E7A81] hover:text-white">
-                <img class="w-7" src="${item.category_icon}" alt="">
+                <img class="hidden lg:block w-7" src="${item.category_icon}" alt="">
            
            <span>${item.category}</span>
         </button>
