@@ -64,7 +64,6 @@ const displayPets = (pets) => {
   petsContainerEl.innerHTML = "";
   if (pets.length == 0) {
     petsContainerEl.classList.remove("grid");
-
     petsContainerEl.innerHTML = `
 <div class="card bg-base-100 shadow-xl">
     <figure>
@@ -89,6 +88,7 @@ const displayPets = (pets) => {
     petsContainerEl.classList.remove("w-[375px]");
 
     petsContainerEl.classList.add("grid");
+    petsContainerEl.classList.add("border-2");
   }
   pets.forEach((pet) => {
     const div = document.createElement("div");
@@ -348,18 +348,9 @@ const likePost = (image) => {
   const likePostContainerEl = document.getElementById("like-pets-container");
   const div = document.createElement("div");
   div.innerHTML = `
-  
-                        <div>
-                            <img class="w-full" src='${image}' alt="">
-                        </div>
-
-                       
-        
-                            
-
-
-                      
+              <div>
+                <img class="w-full" src='${image}' alt="">
+              </div>       
   `;
   likePostContainerEl.append(div);
 };
-likePost();
