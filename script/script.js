@@ -3,40 +3,30 @@ const loadAllPets = async () => {
   const res = await fetch(url);
   const data = await res.json();
   const pets = data.pets;
-  //   displayPets(data.pets);
   displayPets(pets);
-  //   console.log("Ash");
   document.getElementById("spinner").classList.add("hidden");
 };
+
+// load all pets sort
 const loadSort = async () => {
   const url = "https://openapi.programming-hero.com/api/peddy/pets";
   const res = await fetch(url);
   const data = await res.json();
   const pets = data.pets;
-  //   displayPets(data.pets);
-  //   console.log("Ash");
-  document.getElementById("spinner").classList.add("hidden");
   shortDescendingPrice(pets);
 };
-// loadAllPets();
 
 // sort pets by descending order based on price
-
 const shortDescendingPrice = (pets) => {
-  console.log(pets);
-  //   pets.forEach((element) => {
-  //     console.log(element);
-  //   });
-
-  const sortPetsByPrice = pets.sort((a, b) => b.price - a.price);
-  displayPets(sortPetsByPrice);
+  document.getElementById("pets-container").classList.add("hidden");
+  document.getElementById("spinner").classList.remove("hidden");
+  setTimeout(() => {
+    const sortPetsByPrice = pets.sort((a, b) => b.price - a.price);
+    displayPets(sortPetsByPrice);
+    document.getElementById("spinner").classList.add("hidden");
+    document.getElementById("pets-container").classList.remove("hidden");
+  }, 2000);
 };
-
-// sort button
-// document
-//   .getElementById("sort-btn")
-//   .addEventListener("click", shortDescendingPrice);
-// shortDescendingPrice();
 
 //loading spinner
 const loadingSpinner = () => {
@@ -48,22 +38,39 @@ const loadingSpinner = () => {
 };
 loadingSpinner();
 
-// load categories pets
+// load categories pets btn
 const loadCategories = async () => {
   const url = "https://openapi.programming-hero.com/api/peddy/categories";
-  //   const url = "https://openapi.programming-hero.com/api/peddy/pets";
   const res = await fetch(url);
   const data = await res.json();
   displayCategories(data.categories);
-  //   console.log(data.categories);
+};
+
+// load category pets
+const loadCategoriesPets = async (category, id) => {
+  document.getElementById("pets-container").classList.add("hidden");
+  document.getElementById("spinner").classList.remove("hidden");
+  setTimeout(async () => {
+    const url = `https://openapi.programming-hero.com/api/peddy/category/${category}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    const activeBtn = document.getElementById(`btn-${id}`);
+    removeClassBtn();
+    activeBtn.classList.add("active");
+    displayPets(data.data);
+    document.getElementById("spinner").classList.add("hidden");
+    document.getElementById("pets-container").classList.remove("hidden");
+  }, 2000);
 };
 
 // display all pets
 const displayPets = (pets) => {
   const petsContainerEl = document.getElementById("pets-container");
+  const likePostContainerEl = document.getElementById("like-pets-container");
   petsContainerEl.innerHTML = "";
   if (pets.length == 0) {
     petsContainerEl.classList.remove("grid");
+    petsContainerEl.classList.remove("border-2");
     petsContainerEl.innerHTML = `
 <div class="card bg-base-100 shadow-xl">
     <figure>
@@ -85,24 +92,23 @@ const displayPets = (pets) => {
 
 `;
   } else {
-    petsContainerEl.classList.remove("w-[375px]");
-
     petsContainerEl.classList.add("grid");
     petsContainerEl.classList.add("border-2");
+    likePostContainerEl.classList.remove("hidden");
   }
   pets.forEach((pet) => {
     const div = document.createElement("div");
-
     div.innerHTML = `
     
-                         <div class="card bg-base-100 p-5 w-[365px] border">
+    
+                         <div class="card bg-base-100 p-5 w-auto border">
                             <figure class="h-52">
                                 <img class="h-full w-full object-cover" src=${
                                   pet.image
                                 }
                                     alt="pets" />
                             </figure>
-                            <div class="card-body mb-2">
+                            <div class="card-body mb-2 relative">
                                 <h2 class="card-title font-bold text-xl">
                                     ${pet.pet_name}
                                 </h2>
@@ -111,7 +117,9 @@ const displayPets = (pets) => {
                                         <img src="images/Frame (4).png" alt="">
                                     </div>
                                     <div>
-                                        <p>Breed: ${pet?.breed || "N/A"}</p>
+                                        <p>Breed: ${
+                                          pet?.breed || "Not Available"
+                                        }</p>
                                     </div>
                                 </div>
                                 <div class="flex gap-2 items-center">
@@ -120,7 +128,7 @@ const displayPets = (pets) => {
                                     </div>
                                     <div>
                                         <p>Birth: ${
-                                          pet?.date_of_birth || "N/A"
+                                          pet?.date_of_birth || "Not Available"
                                         }</p>
                                     </div>
                                 </div>
@@ -129,7 +137,9 @@ const displayPets = (pets) => {
                                         <img src="images/Frame (2).png" alt="">
                                     </div>
                                     <div>
-                                        <p>Gender: ${pet?.gender || "N/A"}</p>
+                                        <p>Gender: ${
+                                          pet?.gender || "Not Available"
+                                        }</p>
                                     </div>
                                 </div>
                                 <div class="flex gap-2 items-center">
@@ -137,19 +147,20 @@ const displayPets = (pets) => {
                                         <img src="images/Frame (3).png" alt="">
                                     </div>
                                     <div>
-                                        <p>Price: ${
+                                        <p>Price: $${
                                           pet?.price || "Out Of Stock"
-                                        } $</p>
+                                        }</p>
                                     </div>
                                 </div>
-                                <hr class="mt-4 border">
-                                <div class="card-actions justify-evenly mt-4">
-                                    <div class="badge badge-outline py-3 px-4 text-xl">
-                                        <button onclick="likePost('${
-                                          pet.image
-                                        }')">
+                                <hr class="mt-4 border-2 mb-5">
+                                <div class="flex gap-5 mt-4 absolute top-[80%] right-[0px] ">
+                                    <div class=" px-4 text-xl">
+                                        <button class="btn badge-outline px-7 text-[#0E7A81] 
+                                            text-xl hover:bg-[#0E7A81] hover:text-white" onclick="likePost('${
+                                              pet.image
+                                            }')">
 
-                                            <img src="images/Frame 1171276315.png" alt="">
+                                           <i class="fa-solid fa-thumbs-up"></i>
                                         </button>
                                     </div>
                                     <div>
@@ -157,7 +168,7 @@ const displayPets = (pets) => {
                                           pet.petId
                                         }')"
                                         id="adopt-btn-${pet.petId}"
-                                            class="badge badge-outline py-3 px-4 text-[#0E7A81] 
+                                            class="btn  badge-outline px-4 text-[#0E7A81] 
                                             text-xl hover:bg-[#0E7A81] hover:text-white">
                                             Adopt
                                         </button>
@@ -166,7 +177,7 @@ const displayPets = (pets) => {
                                     
                                         <button 
                                         onclick="showModalD('${pet.petId}')"
-                                            class=" badge badge-outline py-3 px-4 text-[#0E7A81] 
+                                            class="btn  badge-outline  px-4 text-[#0E7A81] 
                                             text-xl hover:bg-[#0E7A81] hover:text-white">
                                             Details
                                         </button>
@@ -185,18 +196,15 @@ const displayPets = (pets) => {
 
 // show modal
 const showModalD = async (petId) => {
-  //   console.log(petId);
   const url = `https://openapi.programming-hero.com/api/peddy/pet/${petId}`;
   const res = await fetch(url);
   const data = await res.json();
-  //   console.log(data.petData);
-
   const modalContent = document.getElementById("modal-content");
   document.getElementById("customModal").showModal();
   modalContent.innerHTML = `
                             <figure class="min-h-56">
                                 <img class="h-full w-full object-cover" src=${
-                                  data.petData?.image || "N/A"
+                                  data.petData?.image || "Not Available"
                                 }
                                     alt="pets" />
                             </figure>
@@ -204,7 +212,10 @@ const showModalD = async (petId) => {
                                 <div class="flex flex-col md:flex-row md:gap-16 md:items-center">
                                     <div>
                                         <h2 class="card-title font-bold text-xl mb-4">
-                                            ${data.petData?.pet_name || "N/A"}
+                                            ${
+                                              data.petData?.pet_name ||
+                                              "Not Available"
+                                            }
                                         </h2>
                                         <div class="flex gap-2 items-center">
                                             <div>
@@ -212,7 +223,8 @@ const showModalD = async (petId) => {
                                             </div>
                                             <div>
                                                 <p>Breed: ${
-                                                  data.petData?.breed || "N/A"
+                                                  data.petData?.breed ||
+                                                  "Not Available"
                                                 }</p>
                                             </div>
                                         </div>
@@ -223,7 +235,8 @@ const showModalD = async (petId) => {
                                             </div>
                                             <div>
                                                 <p>Gender: ${
-                                                  data.petData?.gender || "N/A"
+                                                  data.petData?.gender ||
+                                                  "Not Available"
                                                 }</p>
                                             </div>
                                         </div>
@@ -244,7 +257,7 @@ const showModalD = async (petId) => {
                                             <div>
                                                 <p>Birth: ${
                                                   data.petData?.date_of_birth ||
-                                                  "N/A"
+                                                  "Not Available"
                                                 }</p>
                                             </div>
                                         </div>
@@ -253,17 +266,20 @@ const showModalD = async (petId) => {
                                                 <img src="images/Frame (3).png" alt="">
                                             </div>
                                             <div>
-                                                <p>Price: ${
+                                                <p>Price: $${
                                                   data.petData?.price ||
                                                   "Out Of Stock"
-                                                } $</p>
+                                                }</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div>
                                     <h2 class="font-semibold text-base mt-8 mb-3">Details Information</h2>
-                                    <p>${data.petData?.pet_details || "N/A"}</p>
+                                    <p>${
+                                      data.petData?.pet_details ||
+                                      "Not Available"
+                                    }</p>
                                 </div>
 
                             </div>
@@ -279,9 +295,8 @@ const showModalD = async (petId) => {
 
 // show count down modal
 const showCountDown = (id) => {
-  // document.getElementById(`adopt-btn-${id}`);
   my_modal_1.showModal();
-  let countValue = 3;
+  let countValue = 4;
   const countNumberEl = document.getElementById("count-number");
 
   const countDown = setInterval(() => {
@@ -296,24 +311,10 @@ const showCountDown = (id) => {
   }, 1000);
 };
 
-// load category pets
-const loadCategoriesPets = async (category, id) => {
-  //   console.log(id);
-  const url = `https://openapi.programming-hero.com/api/peddy/category/${category}`;
-  const res = await fetch(url);
-  const data = await res.json();
-  //   console.log(data);
-  removeClassBtn();
-  const activeBtn = document.getElementById(`btn-${id}`);
-  activeBtn.classList.add("active");
-  displayPets(data.data);
-};
-
 const removeClassBtn = () => {
   const buttons = document.getElementsByClassName("category-btn");
 
   for (let btn of buttons) {
-    // console.log(btn);
     btn.classList.remove("active");
   }
 };
@@ -323,13 +324,13 @@ const displayCategories = (categories) => {
   const btnCategoriesContainer = document.getElementById("btn-container");
 
   categories.forEach((item) => {
-    // console.log(item);
     const btnContainer = document.createElement("div");
-    // ${item.category_icon}
     btnContainer.innerHTML = `
-        <button id="btn-${item.id}"  onClick="loadCategoriesPets('${item.category}','${item.id}')" class="btn category-btn font-bold md:text-xl px-14 rounded-full
+        <button id="btn-${item.id}"
+        onClick="loadCategoriesPets('${item.category}','${item.id}')" 
+        class="btn mr-10 category-btn font-bold md:text-xl px-14 rounded-full
            bg-[#0e798131] text-[#0E7A81]  lg:hover:bg-[#0E7A81] hover:text-white">
-                <img class="hidden lg:block w-7" src="${item.category_icon}" alt="">
+                <img class="hidden xl:block w-7" src="${item.category_icon}" alt="">
            
            <span>${item.category}</span>
         </button>
@@ -339,18 +340,15 @@ const displayCategories = (categories) => {
   });
 };
 
-loadCategories();
-
 // like post section
-
 const likePost = (image) => {
-  //   console.log(image);
   const likePostContainerEl = document.getElementById("like-pets-container");
   const div = document.createElement("div");
   div.innerHTML = `
               <div>
-                <img class="w-full" src='${image}' alt="">
+                <img class="w-full rounded-md" src='${image}' alt="">
               </div>       
   `;
   likePostContainerEl.append(div);
 };
+loadCategories();

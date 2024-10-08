@@ -20,6 +20,11 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.12/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 
 <body class="lato-font">
@@ -110,12 +115,12 @@
                 </div>
 
                 <!-- Dynamic BTN  -->
-                <div id="btn-container" class="mb-10 grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-16 ml-7">
+                <div id="btn-container" class="mb-10 grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-16 p-5">
 
 
                 </div>
 
-                <div class="flex justify-between mb-8 items-center text-center ">
+                <div class="flex justify-between mb-8 items-center text-center p-5">
                     <div>
                         <h2 class="font-black text-xl md:text-2xl">Best Deal For you</h2>
                     </div>
@@ -128,19 +133,21 @@
                     </div>
                 </div>
                 <!-- Dynamic card container -->
-                <div class="flex flex-col md:flex-col lg:flex-row justify-between gap-5 lg:gap-6">
+                <!-- flex flex-col md:flex-col lg:flex-row justify-between gap-5 lg:gap-6 -->
+                <div class="grid grid-cols-12 gap-5 p-">
                     <div id="pets-container"
-                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 p-5 rounded-2xl">
+                        class=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 p-5 rounded-2xl col-span-12 md:col-span-12 lg:col-span-12 2xl:col-span-9">
 
 
 
                     </div>
-                    <div id="like-pets-container" class="w-80 border-2
-                        grid auto-rows-max grid-cols-2 gap-5 p-5">
+                    <div id="like-pets-container"
+                        class="border-2 hidden
+                        grid auto-rows-max grid-cols-2 gap-5 p-5 rounded-2xl  md:ml-64 lg:ml-0 col-span-12 md:col-span-10 lg:col-span-4 2xl:col-span-3">
 
 
-                        <img src="images/Rectangle 1 (2).png" alt="">
-                        <img src="images/Rectangle 1 (2).png" alt="">
+                        <!-- <img class="w-full" src="images/Rectangle 1 (2).png" alt="">
+                        <img class="w-full" src="images/Rectangle 1 (2).png" alt=""> -->
 
 
 

@@ -1,4 +1,4 @@
-## A Beautiful README.md File
+## README.md File
 
 1. Project name- Peddy
 
@@ -26,4 +26,4 @@
    (d). used "async" function
    (e). used variable "let, const"
 
-5. Live link to the deployed project-
+5. Live link to the deployed project- https://6704ced6e0812ccbcd7b3f91--jovial-peony-4d7565.netlify.app/
