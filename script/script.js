@@ -19,11 +19,13 @@ const loadSort = async () => {
 // sort pets by descending order based on price
 const shortDescendingPrice = (pets) => {
   document.getElementById("pets-container").classList.add("hidden");
+  document.getElementById("like-pets-container").classList.add("hidden");
   document.getElementById("spinner").classList.remove("hidden");
   setTimeout(() => {
     const sortPetsByPrice = pets.sort((a, b) => b.price - a.price);
     displayPets(sortPetsByPrice);
     document.getElementById("spinner").classList.add("hidden");
+    document.getElementById("like-pets-container").classList.remove("hidden");
     document.getElementById("pets-container").classList.remove("hidden");
   }, 2000);
 };
@@ -49,6 +51,7 @@ const loadCategories = async () => {
 // load category pets
 const loadCategoriesPets = async (category, id) => {
   document.getElementById("pets-container").classList.add("hidden");
+  document.getElementById("like-pets-container").classList.add("hidden");
   document.getElementById("spinner").classList.remove("hidden");
   setTimeout(async () => {
     const url = `https://openapi.programming-hero.com/api/peddy/category/${category}`;
@@ -59,6 +62,7 @@ const loadCategoriesPets = async (category, id) => {
     activeBtn.classList.add("active");
     displayPets(data.data);
     document.getElementById("spinner").classList.add("hidden");
+    document.getElementById("like-pets-container").classList.remove("hidden");
     document.getElementById("pets-container").classList.remove("hidden");
   }, 2000);
 };
